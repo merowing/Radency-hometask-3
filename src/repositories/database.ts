@@ -1,0 +1,60 @@
+const database = [
+    {
+        id: 0,
+        name: 'Note 1',
+        created: 0,
+        category: 0,
+        description: '',
+        archived: 0,
+    },
+    {
+        id: 1,
+        name: 'Note 2',
+        created: 0,
+        category: 1,
+        description: '',
+        archived: 0,
+    },
+    {
+        id: 2,
+        name: 'Note 3',
+        created: 0,
+        category: 1,
+        description: '',
+        archived: 1,
+    },
+    {
+        id: 3,
+        name: 'Note 4',
+        created: 0,
+        category: 2,
+        description: '',
+        archived: 0,
+    },
+    {
+        id: 4,
+        name: 'Note 5',
+        created: 0,
+        category: 2,
+        description: '',
+        archived: 0,
+    },
+    {
+        id: 5,
+        name: 'Note 6',
+        created: 0,
+        category: 0,
+        description: '',
+        archived: 1,
+    },
+    {
+        id: 6,
+        name: 'Note 7',
+        created: 0,
+        category: 1,
+        description: '',
+        archived: 1,
+    },
+]
+
+export default database;

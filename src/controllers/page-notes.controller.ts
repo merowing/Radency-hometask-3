@@ -1,6 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Res } from "@nestjs/common";
 import { StateNotesType } from "../helpers/note.interface";
-import { PageNotesService } from "../services/pagenotes.service";
+import { PageNotesService } from "../services/page-notes.service";
 
 @Controller()
 export class pageNotesController {

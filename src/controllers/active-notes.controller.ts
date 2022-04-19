@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Patch, Body, ValidationPipe } from "@nestjs/common";
 import { StateNotesType } from "../helpers/note.interface";
-import { StateNotesService } from "../services/statenotes.service";
+import { StateNotesService } from "../services/state-notes.service";
 
 @Controller()
 export class activeNotesController {

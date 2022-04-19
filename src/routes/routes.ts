@@ -1,8 +1,8 @@
 import { NotesModule } from '../modules/notes.module';
-import { ActiveNotesModule } from '../modules/activenotes.module';
-import { ArchiveNotesModule } from '../modules/archivenotes.module';
+import { ActiveNotesModule } from '../modules/active-notes.module';
+import { ArchiveNotesModule } from '../modules/archive-notes.module';
 import { InfoModule } from '../modules/info.module';
-import { PageNotesModule } from '../modules/pagenotes.module';
+import { PageNotesModule } from '../modules/page-notes.module';
 import { RequestMethod } from '@nestjs/common';
 
 const routes = [

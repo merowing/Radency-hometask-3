@@ -1,4 +1,4 @@
-import unique from "src/helpers/uniqueId";
+import unique from "../helpers/uniqueId";
 
 const database = [
     {

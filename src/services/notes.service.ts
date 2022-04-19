@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { NoteType, EditNoteType, ErrorStringType } from '../helpers/note.interface';
 import unique from '../helpers/uniqueId';
 import { getAllNotesDB, getNoteDB, removeNoteDB, addNoteDB, updateNoteDB } from '../helpers/notesDatabase';
-import { errorEmptyObject, errorIdNotFound, errorPositiveId } from '../helpers/errorMessages';
+import { errorEmptyObject, errorIdNotFound } from '../helpers/errorMessages';
 
 @Injectable()
 export class NotesService {

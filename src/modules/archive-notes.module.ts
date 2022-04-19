@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { archiveNotesController } from '../controllers/archivenotes.controller';
-import { StateNotesService } from '../services/statenotes.service';
+import { archiveNotesController } from '../controllers/archive-notes.controller';
+import { StateNotesService } from '../services/state-notes.service';
 
 @Module({
     controllers:[archiveNotesController],

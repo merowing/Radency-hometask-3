@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 @Injectable()
 export class InfoService {
     getInfo(): string {
-        let routes = [
+        const routes = [
             ['/', 'home'],
             ['/info', 'information. this page'],
             [''],
@@ -16,10 +16,14 @@ export class InfoService {
             ['/stats', 'statistics'],
             [''],
             ['[POST]:'],
-            ['/notes', 'json string. add note'],
-            ['/archive', 'note id. archive/unarchive note'],
-            ['/edit', 'json string. edit note'],
-            ['/remove', 'note id. remove note']];
+            ['/notes', 'add note: { name, category, description }'],
+            [''],
+            ['[PATCH]:'],
+            ['/notes/:id', 'edit note by id: { name, category, description, archived }'],
+            ['You can change all values at the same time or separately'],
+            [''],
+            ['[DELETE]:'],
+            ['/notes/:id', 'remove note by id']];
 
         return '<pre>' + routes.map(item => item.join(' - ')).join('<br>') + '</pre>';
     }

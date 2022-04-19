@@ -1,29 +1,27 @@
-import { Body, Controller, Get, NotFoundException, Param, Post } from "@nestjs/common";
+import { Body, Controller, Get, NotFoundException, Param, Post, Put, Delete, Patch, ParseIntPipe, UsePipes, ValidationPipe } from "@nestjs/common";
 import { NotesService } from "../services/notes.service";
-import { Notes, StateNotes } from "../note.interface";
+import { Notes, StateNotes } from "../helpers/note.interface";
+import { AddNoteDto } from "src/helpers/dto/add-note.dto";
+import { EditNoteDto } from "src/helpers/dto/edit-note.dto";
+import { errorNoteNotFound } from "src/helpers/errorMessages";
 
 @Controller()
 export class notesController {
   constructor(private readonly noteService: NotesService) {}
 
   @Get(':id')
-  getNote(@Param('id') id: string): Notes {
-    if(isNaN(+id)) throw new NotFoundException();
-    let note = this.noteService.getNote(id);
-    let data = {data: note, error: ''};
+  getNote(@Param('id', ParseIntPipe) id: number): Notes {
+    const note = this.noteService.getNote(id);
     
-    if(!note) {
-      data.data = null;
-      data.error = 'Not found'
-    }
-
-    return data;
+    if(!note) return errorNoteNotFound();
+    
+    return {data: note, error: ''};
   }
 
   @Get()
   getNotes(): StateNotes {
-    let data = this.noteService.getNotes();
-    let length = data.length;
+    const data = this.noteService.getNotes();
+    const length = data.length;
 
     return {
       data,
@@ -32,8 +30,22 @@ export class notesController {
   }
 
   @Post()
-  addNote(@Body() body) {
-    return body;
+  add(@Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true})) data: AddNoteDto): Object {   
+    return this.noteService.addNote(data);
+  }
+
+  @Patch(':id')
+  update(
+    @Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true})) data: EditNoteDto,
+    @Param('id', ParseIntPipe) id: string
+  ): Object {
+    
+    return this.noteService.editNote(+id, data);
+  }
+
+  @Delete(':id')
+  remove(@Param('id', ParseIntPipe) id): boolean | Object {
+    return this.noteService.removeNote(id);
   }
 
 }

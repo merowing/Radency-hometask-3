@@ -7,7 +7,7 @@ interface Note {
     archived: number,
 }
 interface Notes {
-    data: Note,
+    data: Note | boolean,
     error: string,
 }
 interface Stats {

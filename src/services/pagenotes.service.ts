@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import database from "src/repositories/database";
+import { getAllNotesDB } from '../helpers/notesDatabase';
 
 @Injectable()
 export class PageNotesService {
     getPageNotes(page: number) {
-        if(page < 0) throw new NotFoundException();
+        if(page < 1 || isNaN(page)) throw new NotFoundException();
         
         const itemsPerPage = 5;
         const start = itemsPerPage * (page - 1);
         const end = itemsPerPage * page;
 
-        let data = database.filter((item, ind) => ind >= start && ind < end);
+        const data = getAllNotesDB().filter((item, ind) => ind >= start && ind < end);
 
         return {
             data,

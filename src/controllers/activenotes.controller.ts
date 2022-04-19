@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { StateNotes } from "src/note.interface";
+import { StateNotes } from "../helpers/note.interface";
 import { StateNotesService } from "../services/statenotes.service";
 
 @Controller()

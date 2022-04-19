@@ -1,7 +1,7 @@
-import database from "src/repositories/database";
+import { getAllNotesDB } from "./notesDatabase";
 
 function activeNotes(status: boolean) {
-    let data = database.filter(item => item.archived === +!status);
+    const data = getAllNotesDB().filter(item => item.archived === +!status);
     return {
         data,
         length: data.length,

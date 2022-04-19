@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import activeNotes from '../helpers/activenotes.helpers'
+import activeNotes from '../helpers/activeNotes'
 
 @Injectable()
 export class StateNotesService {

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { PageNotesService } from 'src/services/pagenotes.service';
+import { PageNotesService } from '../services/pagenotes.service';
 import { pageNotesController } from '../controllers/pagenotes.controller';
 
 @Module({

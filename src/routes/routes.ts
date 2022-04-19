@@ -3,12 +3,26 @@ import { ActiveNotesModule } from '../modules/activenotes.module';
 import { ArchiveNotesModule } from '../modules/archivenotes.module';
 import { InfoModule } from '../modules/info.module';
 import { PageNotesModule } from '../modules/pagenotes.module';
+import { RequestMethod } from '@nestjs/common';
 
 const routes = [
         // get note by id
         {
             path: 'notes/:id',
             module: NotesModule,
+            method: RequestMethod.GET
+        },
+        // edit note by id
+        {
+            path: 'notes/:id',
+            module: NotesModule,
+            method: RequestMethod.PUT,
+        },
+        // remove note by id
+        {
+            path: 'notes/:id',
+            module: NotesModule,
+            method: RequestMethod.DELETE,
         },
         // only active notes
         {
@@ -17,7 +31,7 @@ const routes = [
         },
         // only archive notes
         {
-            path: 'notes/archive',
+            path: 'notes/archived',
             module: ArchiveNotesModule,
         },
         // all notes

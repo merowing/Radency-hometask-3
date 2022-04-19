@@ -48,11 +48,7 @@ const routes = [
         {
             path: 'notes/page/:id',
             module: PageNotesModule,
-        },
-        // redirect to page/1
-        {
-            path: 'notes/page',
-            module: PageNotesModule,
+            method: RequestMethod.GET,
         },
 ];
 

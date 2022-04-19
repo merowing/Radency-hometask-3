@@ -6,14 +6,9 @@ import { PageNotesService } from "../services/pagenotes.service";
 export class pageNotesController {
     constructor(private readonly pageNotesService: PageNotesService) {}
 
-    @Get(':id')
+    @Get()
     getNotePage(@Param('id', ParseIntPipe) id: string): StateNotesType {
         return this.pageNotesService.getPageNotes(+id);
-    }
-
-    @Get()
-    redirect(@Res() res) {
-        return res.redirect('page/1');
     }
 
 }

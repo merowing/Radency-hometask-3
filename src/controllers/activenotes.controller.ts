@@ -1,4 +1,4 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, Post, Patch, Body, ValidationPipe } from "@nestjs/common";
 import { StateNotesType } from "../helpers/note.interface";
 import { StateNotesService } from "../services/statenotes.service";
 
@@ -10,4 +10,10 @@ export class activeNotesController {
     getActive(): StateNotesType {
         return this.stateService.getActiveNotes();
     }
+
+    @Post()
+    allActive(): boolean {
+        return this.stateService.toggleNotesActive();
+    }
+
 }

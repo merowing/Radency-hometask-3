@@ -49,7 +49,7 @@ export class NotesService {
       return getNoteDB(indexItemInDB);
     }
 
-    return errorPositiveId();
+    return errorIdNotFound(id);
   }
 
   removeNote(id: number): boolean | object {

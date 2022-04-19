@@ -1,4 +1,5 @@
-import { getAllNotesDB } from "./notesDatabase";
+import { EditNoteType } from "./note.interface";
+import { getAllNotesDB, updateAllNotesDB } from "./notesDatabase";
 
 function activeNotes(status: boolean) {
     const data = getAllNotesDB().filter(item => item.archived === +!status);
@@ -8,4 +9,8 @@ function activeNotes(status: boolean) {
     }
 }
 
-export default activeNotes;
+function changeNotesActive() {
+    updateAllNotesDB();
+}
+
+export { activeNotes, changeNotesActive };

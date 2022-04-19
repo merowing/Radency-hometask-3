@@ -3,7 +3,7 @@ const errorEmptyObject = (): {error: string} => {
 }
 
 const errorNoteNotFound = (): {data: null, error: string} => {
-    return { data: null, error: 'Note found' }
+    return { data: null, error: 'Not found' }
 }
 
 const errorIdNotFound = (id: number) => {

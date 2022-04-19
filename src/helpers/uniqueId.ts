@@ -1,3 +1,3 @@
-const newId = (id = 7) => () => id++;
+const newId = (id = 0) => () => id++;
 const unique = newId();
 export default unique;

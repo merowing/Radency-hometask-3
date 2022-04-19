@@ -1,12 +1,12 @@
 import { Injectable } from "@nestjs/common";
-import { Note, Stats } from "../helpers/note.interface";
+import { NoteType, StatsType } from "../helpers/note.interface";
 import { getAllNotesDB } from '../helpers/notesDatabase';
 
 @Injectable()
 export class StatsService {
-  getStats(): Array<Stats> {
+  getStats(): Array<StatsType> {
     
-    const stats = getAllNotesDB().reduce((prev: Array<Stats>, current: Note) => {
+    const stats = getAllNotesDB().reduce((prev: Array<StatsType>, current: NoteType) => {
       const idStatsArr = prev.findIndex(item => item.category === current.category);
       
       if(idStatsArr !== -1) {
@@ -19,7 +19,7 @@ export class StatsService {
           archived: +current.archived,
         });
       }
-      
+
       return prev;
     }, []);
 

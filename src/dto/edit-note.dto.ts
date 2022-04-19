@@ -4,21 +4,21 @@ export class EditNoteDto {
     @IsOptional()
     @IsString()
     @IsNotEmpty()
-    name: string;
+    readonly name: string;
 
     @IsOptional()
     @IsNumber()
     @Max(2)
     @Min(0)
-    category: number;
+    readonly category: number;
 
     @IsOptional()
     @IsString()
-    description: string;
+    readonly description: string;
     
     @IsOptional()
     @IsNumber()
     @Max(1)
     @Min(0)
-    archived: number;
+    readonly archived: number;
 }

@@ -1,5 +1,5 @@
 import { Controller, Get } from "@nestjs/common";
-import { StateNotes } from "../helpers/note.interface";
+import { StateNotesType } from "../helpers/note.interface";
 import { StateNotesService } from "../services/statenotes.service";
 
 @Controller()
@@ -7,7 +7,7 @@ export class activeNotesController {
     constructor(private readonly stateService: StateNotesService) {}
     
     @Get()
-    getActive(): StateNotes {
+    getActive(): StateNotesType {
         return this.stateService.getActiveNotes();
     }
 }

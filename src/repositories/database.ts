@@ -1,6 +1,8 @@
+import unique from "src/helpers/uniqueId";
+
 const database = [
     {
-        id: 0,
+        id: unique(),
         name: 'Note 1',
         created: 0,
         category: 0,
@@ -8,7 +10,7 @@ const database = [
         archived: 0,
     },
     {
-        id: 1,
+        id: unique(),
         name: 'Note 2',
         created: 0,
         category: 1,
@@ -16,7 +18,7 @@ const database = [
         archived: 0,
     },
     {
-        id: 2,
+        id: unique(),
         name: 'Note 3',
         created: 0,
         category: 1,
@@ -24,7 +26,7 @@ const database = [
         archived: 1,
     },
     {
-        id: 3,
+        id: unique(),
         name: 'Note 4',
         created: 0,
         category: 2,
@@ -32,7 +34,7 @@ const database = [
         archived: 0,
     },
     {
-        id: 4,
+        id: unique(),
         name: 'Note 5',
         created: 0,
         category: 2,
@@ -40,7 +42,7 @@ const database = [
         archived: 0,
     },
     {
-        id: 5,
+        id: unique(),
         name: 'Note 6',
         created: 0,
         category: 0,
@@ -48,7 +50,7 @@ const database = [
         archived: 1,
     },
     {
-        id: 6,
+        id: unique(),
         name: 'Note 7',
         created: 0,
         category: 1,

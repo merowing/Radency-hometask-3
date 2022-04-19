@@ -1,4 +1,4 @@
-interface Note {
+interface NoteType {
     id: number,
     name: string,
     created: number,
@@ -6,19 +6,28 @@ interface Note {
     description: string,
     archived: number,
 }
-interface Notes {
-    data: Note | boolean,
+interface EditNoteType {
+    name?: string,
+    category?: number,
+    description?: string,
+    archived?: number,
+}
+interface NotesType {
+    data: NoteType | boolean,
     error: string,
 }
-interface Stats {
+interface StatsType {
     category: number,
     active: number,
     archived: number,
 }
-interface StateNotes {
-    data: Note[],
+interface StateNotesType {
+    data: NoteType[],
     length: number,
     page?: number,
 }
+interface ErrorStringType {
+    error?: string,
+}
 
-export { Notes, Note, Stats, StateNotes };
+export { NotesType, NoteType, StatsType, StateNotesType, EditNoteType, ErrorStringType };

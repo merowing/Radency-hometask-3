@@ -1,5 +1,5 @@
 import { Controller, Get, Param, ParseIntPipe, Res } from "@nestjs/common";
-import { StateNotes } from "../helpers/note.interface";
+import { StateNotesType } from "../helpers/note.interface";
 import { PageNotesService } from "../services/pagenotes.service";
 
 @Controller()
@@ -7,7 +7,7 @@ export class pageNotesController {
     constructor(private readonly pageNotesService: PageNotesService) {}
 
     @Get(':id')
-    getNotePage(@Param('id', ParseIntPipe) id: string): StateNotes {
+    getNotePage(@Param('id', ParseIntPipe) id: string): StateNotesType {
         return this.pageNotesService.getPageNotes(+id);
     }
 

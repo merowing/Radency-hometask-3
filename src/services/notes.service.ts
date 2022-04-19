@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Note } from '../helpers/note.interface';
+import { NoteType, EditNoteType, ErrorStringType } from '../helpers/note.interface';
 import unique from '../helpers/uniqueId';
 import { getAllNotesDB, getNoteDB, removeNoteDB, addNoteDB, updateNoteDB } from '../helpers/notesDatabase';
 import { errorEmptyObject, errorIdNotFound, errorPositiveId } from '../helpers/errorMessages';
 
 @Injectable()
 export class NotesService {
-  getNote(id: number): Note | boolean {
+  getNote(id: number): NoteType | boolean {
     const db = getAllNotesDB();
     const index = db.findIndex(item => item.id === id);
     
@@ -14,11 +14,11 @@ export class NotesService {
     return getNoteDB(index);
   }
 
-  getNotes(): Array<Note> {
+  getNotes(): Array<NoteType> {
     return getAllNotesDB();
   }
 
-  addNote(note: {name: string, category: number, description: string}): Note {
+  addNote(note: {name: string, category: number, description: string}): NoteType {
       const { name, category, description } = note;
       const id = unique();
       const created = +new Date();
@@ -37,7 +37,7 @@ export class NotesService {
       return data;
   }
 
-  editNote(id: number, data: Object): Object {
+  editNote(id: number, data: EditNoteType): NoteType | ErrorStringType {
     if(!Object.keys(data).length) {
       return errorEmptyObject()
     }
@@ -46,7 +46,7 @@ export class NotesService {
 
     if(indexItemInDB >= 0) {
       updateNoteDB(data, indexItemInDB);
-      return this.getNote(indexItemInDB);
+      return getNoteDB(indexItemInDB);
     }
 
     return errorPositiveId();

@@ -1,16 +1,17 @@
-import { Body, Controller, Get, NotFoundException, Param, Post, Put, Delete, Patch, ParseIntPipe, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post,
+  Delete, Patch, ParseIntPipe, ValidationPipe } from "@nestjs/common";
 import { NotesService } from "../services/notes.service";
-import { Notes, StateNotes } from "../helpers/note.interface";
-import { AddNoteDto } from "src/helpers/dto/add-note.dto";
-import { EditNoteDto } from "src/helpers/dto/edit-note.dto";
-import { errorNoteNotFound } from "src/helpers/errorMessages";
+import { NoteType, ErrorStringType, NotesType, StateNotesType } from "../helpers/note.interface";
+import { AddNoteDto } from "../dto/add-note.dto";
+import { EditNoteDto } from "../dto/edit-note.dto";
+import { errorNoteNotFound } from "../helpers/errorMessages";
 
 @Controller()
 export class notesController {
   constructor(private readonly noteService: NotesService) {}
 
   @Get(':id')
-  getNote(@Param('id', ParseIntPipe) id: number): Notes {
+  getNote(@Param('id', ParseIntPipe) id: number): NotesType {
     const note = this.noteService.getNote(id);
     
     if(!note) return errorNoteNotFound();
@@ -19,7 +20,7 @@ export class notesController {
   }
 
   @Get()
-  getNotes(): StateNotes {
+  getNotes(): StateNotesType {
     const data = this.noteService.getNotes();
     const length = data.length;
 
@@ -38,7 +39,7 @@ export class notesController {
   update(
     @Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true})) data: EditNoteDto,
     @Param('id', ParseIntPipe) id: string
-  ): Object {
+  ): NoteType | ErrorStringType {
     
     return this.noteService.editNote(+id, data);
   }

@@ -11,4 +11,5 @@ export class statsController {
       data: this.statsService.getStats()
     }
   }
+  
 }

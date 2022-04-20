@@ -1,21 +1,17 @@
 import { Injectable } from '@nestjs/common';
 import { NoteType, EditNoteType, ErrorStringType } from '../helpers/note.interface';
-import unique from '../helpers/uniqueId';
-import { getAllNotesDB, getNoteDB, removeNoteDB, addNoteDB, updateNoteDB } from '../helpers/notesDatabase';
 import { errorEmptyObject, errorIdNotFound } from '../helpers/errorMessages';
+import unique from '../helpers/uniqueId';
+import DB from '../helpers/notesDatabase';
 
 @Injectable()
 export class NotesService {
   getNote(id: number): NoteType | boolean {
-    const db = getAllNotesDB();
-    const index = db.findIndex(item => item.id === id);
-    
-    if(index === -1) return false;
-    return getNoteDB(index);
+    return DB.getNote(id);
   }
 
   getNotes(): Array<NoteType> {
-    return getAllNotesDB();
+    return DB.getAllNotes();
   }
 
   addNote(note: {name: string, category: number, description: string}): NoteType {
@@ -32,33 +28,23 @@ export class NotesService {
             description,
             archived,
       };
-      addNoteDB(data);
+      DB.addNote(data);
 
       return data;
   }
 
   editNote(id: number, data: EditNoteType): NoteType | ErrorStringType {
     if(!Object.keys(data).length) {
-      return errorEmptyObject()
+      return errorEmptyObject();
     }
+    
+    let edited = DB.editNote(data, id);
+    if(!edited) return errorIdNotFound(+id);
 
-    const indexItemInDB = getAllNotesDB().findIndex(item => item.id === id);
-
-    if(indexItemInDB >= 0) {
-      updateNoteDB(data, indexItemInDB);
-      return getNoteDB(indexItemInDB);
-    }
-
-    return errorIdNotFound(id);
+    return DB.getNote(id);
   }
 
-  removeNote(id: number): boolean | object {
-    const index = getAllNotesDB().findIndex(item => item.id === id);
-    if(index !== -1) {
-      removeNoteDB(index);
-      return true;
-    }
-
-    return errorIdNotFound(id);
+  removeNote(id: number): boolean {
+    return DB.removeNote(id);
   }
 }

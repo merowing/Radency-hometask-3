@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { getAllNotesDB } from '../helpers/notesDatabase';
+import DB from '../helpers/notesDatabase';
 
 @Injectable()
 export class PageNotesService {
@@ -10,7 +10,7 @@ export class PageNotesService {
         const start = itemsPerPage * (page - 1);
         const end = itemsPerPage * page;
 
-        const data = getAllNotesDB().filter((item, ind) => ind >= start && ind < end);
+        const data = DB.getAllNotes().filter((item, ind) => ind >= start && ind < end);
 
         return {
             data,

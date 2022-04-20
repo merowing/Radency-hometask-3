@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { activeNotes, changeNotesActive } from '../helpers/activeNotes'
+import activeNotes from '../helpers/activeNotes'
+import DB from '../helpers/notesDatabase';
 
 @Injectable()
 export class StateNotesService {
@@ -11,7 +12,6 @@ export class StateNotesService {
     }
 
     toggleNotesActive(): boolean {
-        changeNotesActive();
-        return true;
+       return DB.toggleActive();
     }
 }

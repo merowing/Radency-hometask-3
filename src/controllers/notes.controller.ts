@@ -4,7 +4,7 @@ import { NotesService } from "../services/notes.service";
 import { NoteType, ErrorStringType, NotesType, StateNotesType } from "../helpers/note.interface";
 import { AddNoteDto } from "../dto/add-note.dto";
 import { EditNoteDto } from "../dto/edit-note.dto";
-import { errorNoteNotFound } from "../helpers/errorMessages";
+import { errorNoteNotFound, errorIdNotFound } from "../helpers/errorMessages";
 
 @Controller()
 export class notesController {
@@ -40,13 +40,19 @@ export class notesController {
     @Body(new ValidationPipe({whitelist: true, forbidNonWhitelisted: true})) data: EditNoteDto,
     @Param('id', ParseIntPipe) id: string
   ): NoteType | ErrorStringType {
-    
+
     return this.noteService.editNote(+id, data);
+    
   }
 
   @Delete(':id')
   remove(@Param('id', ParseIntPipe) id): boolean | Object {
-    return this.noteService.removeNote(id);
+    let removed = this.noteService.removeNote(id);
+    if(!removed) {
+      return errorIdNotFound(id);
+    }
+
+    return removed;
   }
 
 }

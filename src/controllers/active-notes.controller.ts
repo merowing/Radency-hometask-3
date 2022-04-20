@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Patch, Body, ValidationPipe } from "@nestjs/common";
+import { Controller, Get, Post } from "@nestjs/common";
 import { StateNotesType } from "../helpers/note.interface";
 import { StateNotesService } from "../services/state-notes.service";
 

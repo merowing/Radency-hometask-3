@@ -1,50 +1,51 @@
 import database from '../repositories/database';
-import { NoteType, EditNoteType } from './note.interface';
+import { NoteType } from './note.interface';
 
-const getDB = db();
+const db = new editDatabase();
 
-function db() {
+function editDatabase() {
     let tempDB = [...database];
 
-    return function(data = null, id = null) {
-        // get all notes
-        if(!data && id === null) return tempDB;
+    const getIndex = (ind: number) => {
+        return tempDB.findIndex(note => note.id === ind);
+    }
 
-        // remote note
-        if(id >= 0 && !data) tempDB.splice(id, 1);
+    this.getAllNotes = () => tempDB;
 
-        // add new note
-        if(data && !id) tempDB = [...tempDB, data];
+    this.getNote = (index: number) => {
+        const ind = getIndex(index);
+        if(ind < 0) return false;
+        
+        return tempDB[ind];
+    }
 
-        // edit note
-        if(data && id !== null) tempDB[id] = {...tempDB[id], ...data};
+    this.removeNote = (id: number) => {
+        const ind = getIndex(id);
+        if(ind < 0) return false;
+        
+        tempDB.splice(ind, 1);
+        return true;
+    }
 
-        // toggle active all notes
-        if(data === null && id === -1) {
-            const state = tempDB.some(item => item.archived);
-            tempDB = tempDB.map(item => {
-                return {...item, archived: +!state};
-            });
-        }
+    this.addNote = (data: NoteType) => {
+        tempDB = [...tempDB, data];
+    }
 
+    this.editNote = (data: NoteType, id: number) => {
+        const ind = getIndex(id);
+        if(ind < 0) return false;
+
+        tempDB[ind] = {...tempDB[ind], ...data};
+        return tempDB[ind];
+    }
+
+    this.toggleActive = () => {
+        const state = tempDB.some(item => item.archived);
+        tempDB = tempDB.map(item => {
+            return {...item, archived: +!state};
+        });
+        return true;
     }
 }
 
-const updateAllNotesDB = () => getDB(null, -1);
-
-const updateNoteDB = (data: EditNoteType, id: number) => getDB(data, id);
-
-const removeNoteDB = (id: number) => getDB(null, id);
-
-const getAllNotesDB = () => getDB();
-
-const getNoteDB = (index: number) => {
-    const db = getDB();
-    
-    return db[index];
-}
-
-const addNoteDB = (data: NoteType) => getDB(data);
-const getCountDB = () => getDB().length;
-
-export { getAllNotesDB, getNoteDB, addNoteDB, updateNoteDB, removeNoteDB, getCountDB, updateAllNotesDB };
+export default db;
